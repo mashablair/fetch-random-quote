@@ -18,9 +18,9 @@
 
 <body>
 
-  <h1>Quote by Ron Swanson</h1>
+  <h1>Random Ron</h1>
 
-  <blockquote></blockquote>
+  <blockquote><em id="quote" aria-live="polite"></em></blockquote>
 
   <br>
   <button>More Ron</button>
@@ -31,7 +31,7 @@
     (function () {
       "use strict";
 
-      var quote = document.querySelector('blockquote');
+      var quote = document.querySelector('#quote');
       var button = document.querySelector('button');
 
       function getQuote() {
@@ -51,6 +51,8 @@
           }).catch(function (err) {
             // There was an error
             console.warn('Something went wrong.', err);
+            quote.textContent = "[Sorry, something went wrong! But here is a joke for you anyway 😜] I believe luck is a concept invented by the weak to explain their failures."
+
           });
       }
 
