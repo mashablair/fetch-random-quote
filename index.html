@@ -49,19 +49,22 @@
           }).then(function (data) {
             // This is the JSON from our response
             console.log(data);
-            var current_quote = data[0];
 
-
-            if (array.indexOf(current_quote) === -1) {
-              if (array.length === 50) {
-                array.length = 0;
-              }
-
-              array.push(data[0]);
-              quote.textContent = data[0];
-            } else {
+            // if quote already in array, get another quote and bail
+            if (array.indexOf(data[0]) > -1) {
               getQuote();
+              return;
             }
+
+            // otherwise, display the quote and add it to array
+            array.push(data[0]);
+            quote.textContent = data[0];
+
+            // if array is full, empty it
+            if (array.length > 50) {
+              array.length = [];
+            }
+
           }).catch(function (err) {
             // There was an error
             console.warn('Something went wrong.', err);
