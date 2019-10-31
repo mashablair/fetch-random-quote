@@ -35,6 +35,7 @@
 
       var quote = document.querySelector('#quote');
       var button = document.querySelector('button');
+      var array = [];
 
       function getQuote() {
         fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
@@ -48,8 +49,19 @@
           }).then(function (data) {
             // This is the JSON from our response
             console.log(data);
-            quote.textContent = data[0];
+            var current_quote = data[0];
 
+
+            if (array.indexOf(current_quote) === -1) {
+              if (array.length === 50) {
+                array.length = 0;
+              }
+
+              array.push(data[0]);
+              quote.textContent = data[0];
+            } else {
+              getQuote();
+            }
           }).catch(function (err) {
             // There was an error
             console.warn('Something went wrong.', err);
